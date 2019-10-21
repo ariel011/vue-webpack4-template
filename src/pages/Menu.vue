@@ -1,16 +1,25 @@
 <template>
-  <div class="full-width center-content">
-    <img src="static/img/logo.png">
-    <WelcomeMessage name="Beautiful World" />
-  </div>
+  <ul>
+    <li v-for="item in menu">
+        {{ item.name }}
+    </li>
+  </ul>
 </template>
 
 <script>
-import WelcomeMessage from 'components/Home/WelcomeMessage'
-
 export default {
-  components: {
-    WelcomeMessage
+  data: function () {
+    return {
+      menu: []
+    }
+  },
+  created: function () {
+    fetch('https://api.myjson.com/bins/17yynu')
+      .then(response => response.json())
+      .then(json => {
+        this.menu = json.items
+      })
   }
 }
+
 </script>
